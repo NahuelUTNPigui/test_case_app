@@ -1,2 +1,3 @@
 # test_case_app
-Es una aplicacion de comandos para crear test cases
+Es una aplicacion de comandos para gestionar test cases
+Por ahora puramente CLI
