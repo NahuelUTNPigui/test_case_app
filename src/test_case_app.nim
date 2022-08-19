@@ -34,8 +34,8 @@ proc play()=
   echo()
 
 proc main_point()=
-  restart_data_base()
-  var dbConn=start_db()
+  
+  var dbConn=restart_db()
   
   var p1 = newProy("Nafa")
   var p2 = newProy("algo")
@@ -71,9 +71,9 @@ proc main_point()=
   var tc_1=newTestCase(1,"probando us1","todo bien","todo bien",2)
   insert_t(dbConn,tc1)
 
-  var paso1=newPaso(1,"paso 1",2,"a")
-  var paso2=newPaso(1,"paso 2",3,"b")
-  var paso3=newPaso(1,"paso 3",1,"c")
+  var paso1=newPaso(1,"paso 1",2)
+  var paso2=newPaso(1,"paso 2",3)
+  var paso3=newPaso(1,"paso 3",1)
   insert_t(dbConn,paso1)
   insert_t(dbConn,paso2)
   insert_t(dbConn,paso3)
@@ -84,8 +84,7 @@ proc main_point()=
 when isMainModule:
 
   echo("Bienvenido al test case app")
+  
   menu_principal()
-
-
 
 

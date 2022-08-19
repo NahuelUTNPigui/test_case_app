@@ -1,0 +1,84 @@
+NO es una palabra secreta para cancelar un imput
+
+Menu Principal
+	1)Salir
+	2)Ver Proyectos
+		2.1)Lista
+	3)Elegir Proyecto
+	4)Agregar Pryecto
+
+Menu Ver proyectos
+	1)Salir
+	2)Ver lista
+
+Menu Elegir proyecto
+	1)Salir
+	2)Ver lista
+		2.1)Salir
+		2.2)Escribir id
+		2.3)Escribir nombre
+			2.1.1)Salir
+			2.1.2)User stories
+			2.1.3)Eliminar
+Menu agregar proyecto
+	1)Salir
+	2)Agregar proyecto
+		2.1)Escribir nombre
+
+Menu user stories
+	1)Salir
+	2)Ver User story
+		2.1)lista
+	3)Elegir user story
+	4)Agregar user story
+
+Menu ver user story
+	1)Salir
+	2)Ver users
+
+Menu elegir user
+	1)Salir
+	2)Ver lista
+		2.1)Escribir id
+			2.1.1)Salir
+			2.1.2)Menu test cases
+			2.1.3)Menu bugs
+			2.1.4)Eliminar
+
+Menu Agregar user story
+	1)Salir
+	2)Agregar user
+		2.1)Escribir nombre
+
+Menu test case
+	1)Salir
+	2)Ver Test Cases
+		2.1)lista
+	3)Elegir test case
+	4)Agregar test case
+		4.1)Escribir nombre
+		4.2)Escribir expected
+		4.3)Escribir resultado
+		4.4)Escribir pass
+		4.5)Escribir pasos
+			4.5.1)Terminar
+			4.5.2)Escribir descripcion
+Menu elegir test case
+	1)Salir
+	2)Escribir id
+		1)Salir
+		2)Menu pasos
+		3)Modificar
+		4)Eliminar
+
+Menu bugs
+	1)Salir
+	2)Ver bugs
+	3)Elegir bugs
+		3.1)Escribir id
+		3.2)Modificar
+			3.2.1)Escribir nombre
+		3.3)Eliminar
+
+	4)Agregar Bug
+		4.1)Escribir nombre

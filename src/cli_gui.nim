@@ -1,5 +1,8 @@
 import std/parseutils
+import norm
 import tables
+import models
+import c
 proc tomar_opcion(inicio=0,fin:int,mensaje=""):int=
     var consoleInput=readLine(stdin)
     
@@ -13,13 +16,8 @@ proc tomar_opcion(inicio=0,fin:int,mensaje=""):int=
         consoleInput=readLine(stdin)
         chars=parseInt(consoleInput,opcion,0)
     return opcion
-proc ver_todos_los_proyectos()=
-    echo "Todos los proyectos"
-proc salir()=
-    echo "Chau"
-
 #Siempre el primero metodo es para salir
-proc menu_generico(mensaje_inicial="Hola",mensajes_opciones:seq[string],opcion_inicio=1,opcion_fin=2,opcion_accion:Table[int,proc()])=
+proc menu_generico(mensaje_inicial="Hola",mensajes_opciones:seq[string],opcion_inicio=1,opcion_fin=2,opcion_accion:Table[int,proc()],valores:seq[int])=
     echo mensaje_inicial
     var i=0
     var opcion:int = -1
@@ -29,9 +27,19 @@ proc menu_generico(mensaje_inicial="Hola",mensajes_opciones:seq[string],opcion_i
             echo m
         opcion=tomar_opcion(opcion_inicio,opcion_fin)
         opcion_accion[opcion]()
+let dbConn=start_db()
+
+#Opciones menu principal
+proc ver_todos_los_proyectos()=
+    show_all_ps(dbConn)
+    echo "Todos los proyectos"
+proc salir()=
+    echo "Salir"
+#MENU PRINCIPAL
 proc create_mensajes_opciones_menu_inicial():seq[string]=
     var mensajes_opciones = @["1) Para salir"]
     mensajes_opciones.add("2) Para ver los proyectos")
+    mensajes_opciones.add("3) Elegir proyecto")
     return mensajes_opciones
 proc create_table_menu_inicial():Table[int,proc()]=
     var opcion_accion=initTable[int,proc()]()
@@ -42,4 +50,4 @@ proc menu_principal*()=
     let mensaje_inicial="Hola dev"
     var mensajes_opciones =create_mensajes_opciones_menu_inicial()
     var opcion_accion=create_table_menu_inicial()
-    menu_generico(mensaje_inicial,mensajes_opciones,1,2,opcion_accion)
+    menu_generico(mensaje_inicial,mensajes_opciones,1,2,opcion_accion,@[])
