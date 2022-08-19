@@ -2,7 +2,7 @@ import norm/[model,sqlite]
 import std/with
 import std/os
 import models
-
+import cli_gui
 proc restart_data_base()=
   removeFile("database")
 proc play()=
@@ -39,8 +39,8 @@ proc main_point()=
   
   var p1 = newProy("Nafa")
   var p2 = newProy("algo")
-  insert_proy(dbConn,p1)
-  insert_proy(dbConn,p2)
+  insert_t(dbConn,p1)
+  insert_t(dbConn,p2)
   #with dbConn:
   #  insert p1
   #  insert p2
@@ -54,9 +54,9 @@ proc main_point()=
   var us2=newUserStory(1,"testeando")
   var us3=newUserStory(2,"looking")
 
-  insert_us(dbConn,us1)
-  insert_us(dbConn,us2)
-  insert_us(dbConn,us3)
+  insert_t(dbConn,us1)
+  insert_t(dbConn,us2)
+  insert_t(dbConn,us3)
 
   var someUss1=select_all_user_story(dbConn,1)
   echo "proy 1"
@@ -68,11 +68,23 @@ proc main_point()=
   for u in someUss2:
     echo u[]
 
-  echo()
+  var tc_1=newTestCase(1,"probando us1","todo bien","todo bien",2)
+  insert_t(dbConn,tc1)
+
+  var paso1=newPaso(1,"paso 1",2,"a")
+  var paso2=newPaso(1,"paso 2",3,"b")
+  var paso3=newPaso(1,"paso 3",1,"c")
+  insert_t(dbConn,paso1)
+  insert_t(dbConn,paso2)
+  insert_t(dbConn,paso3)
+
+  var somePasos=select_all_pasos(dbConn,1)
+  for p in somePasos:
+    echo p[]
 when isMainModule:
 
   echo("Bienvenido al test case app")
-  main_point()
+  menu_principal()
 
 
 
