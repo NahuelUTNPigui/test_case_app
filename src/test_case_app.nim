@@ -84,7 +84,11 @@ proc main_point()=
 when isMainModule:
 
   echo("Bienvenido al test case app")
-  
-  menu_principal()
-
+  when declared(commandLineParams):
+    if(len(commandLineParams())>0):
+      var opcion=commandLineParams()[0]
+      if(cmp(opcion,"seed")==0):
+        restart_data_base()
+    else:
+      menu_principal()
 

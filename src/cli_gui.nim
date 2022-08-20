@@ -1,9 +1,10 @@
 import std/parseutils
-import norm
 import tables
 import models
 import c
+var dbConn=restart_db()
 proc tomar_opcion(inicio=0,fin:int,mensaje=""):int=
+    echo "Escriba un numero entre " & $inicio & " y " & $fin & ":"
     var consoleInput=readLine(stdin)
     
     var opcion:int
@@ -27,12 +28,23 @@ proc menu_generico(mensaje_inicial="Hola",mensajes_opciones:seq[string],opcion_i
             echo m
         opcion=tomar_opcion(opcion_inicio,opcion_fin)
         opcion_accion[opcion]()
-let dbConn=start_db()
 
 #Opciones menu principal
 proc ver_todos_los_proyectos()=
     show_all_ps(dbConn)
-    echo "Todos los proyectos"
+proc elegir_proyecto()=
+    show_all_ps(dbConn)
+    echo "Escribir el id: "
+    var consoleInput=readLine(stdin)
+    echo consoleInput
+proc guardar_proyecto()=
+    echo "Escribir el nombre: "
+    var consoleInput=readLine(stdin)
+    if(not isNO(consoleInput)):
+        var p=newProy(consoleInput)
+        insert_t[Proyecto](dbConn,p)
+    else:
+        echo "Sera la proxima"
 proc salir()=
     echo "Salir"
 #MENU PRINCIPAL
@@ -40,14 +52,17 @@ proc create_mensajes_opciones_menu_inicial():seq[string]=
     var mensajes_opciones = @["1) Para salir"]
     mensajes_opciones.add("2) Para ver los proyectos")
     mensajes_opciones.add("3) Elegir proyecto")
+    mensajes_opciones.add("4) Guardar proyecto")
     return mensajes_opciones
 proc create_table_menu_inicial():Table[int,proc()]=
     var opcion_accion=initTable[int,proc()]()
     opcion_accion[1]=salir
     opcion_accion[2]=ver_todos_los_proyectos
+    opcion_accion[3]=elegir_proyecto
+    opcion_accion[4]=guardar_proyecto
     return opcion_accion
 proc menu_principal*()=
     let mensaje_inicial="Hola dev"
     var mensajes_opciones =create_mensajes_opciones_menu_inicial()
     var opcion_accion=create_table_menu_inicial()
-    menu_generico(mensaje_inicial,mensajes_opciones,1,2,opcion_accion,@[])
+    menu_generico(mensaje_inicial,mensajes_opciones,1,len(mensajes_opciones),opcion_accion,@[])
